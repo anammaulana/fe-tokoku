@@ -28,14 +28,14 @@ pipeline {
             }
         }
 
-    stage('Fix Permissions') {
-    steps {
-        script {
-            echo 'Fixing permissions for build process'
-            sh "sudo chown -R jenkins:jenkins ${DEPLOY_DIR} && sudo chmod -R 775 ${DEPLOY_DIR}"
-        }
-    }
-}
+//     stage('Fix Permissions') {
+//     steps {
+//         script {
+//             echo 'Fixing permissions for build process'
+//             sh "sudo chown -R jenkins:jenkins ${DEPLOY_DIR} && sudo chmod -R 775 ${DEPLOY_DIR}"
+//         }
+//     }
+// }
 
 
         stage('Build') {
