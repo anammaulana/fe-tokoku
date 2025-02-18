@@ -45,7 +45,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            kontolodon
+            kontolodon23
           </a>
         </div>
       </main>
