@@ -12,7 +12,7 @@ pipeline {
     stages {
          stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/anammaulana/fe-tokoku.git'
+                git branch:${BRANCH}, url: ${REPO_URL}'
             }
         }
         
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     echo 'Restarting application with PM2'
-                    sh "pm2 restart ${APP_NAME} --update-env"
+                    sh "pm2 restart ${APP_NAME} "
                 }
             }
         }
