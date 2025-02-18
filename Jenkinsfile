@@ -12,7 +12,7 @@ pipeline {
     stages {
          stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/anammaulana/tokoku.git'
+                git branch: 'main', url: 'https://github.com/anammaulana/fe-tokoku.git'
             }
         }
         
