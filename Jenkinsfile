@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies'
-                    sh "cd ${DEPLOY_DIR}"
+                    sh "cd ${DEPLOY_DIR}&& npm install"
                 }
             }
         }
