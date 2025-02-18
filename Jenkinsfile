@@ -10,32 +10,21 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+         stage('Checkout') {
             steps {
-                script {
-                    echo 'Pulling latest code from repository'
-                    sh "cd ${DEPLOY_DIR} && git reset --hard HEAD && git clean -fd && git pull origin ${BRANCH}"
-                }
+                git branch: 'main', url: 'https://github.com/anammaulana/tokoku.git'
             }
         }
+        
 
         stage('Install Dependencies') {
             steps {
                 script {
                     echo 'Installing dependencies'
-                    sh "cd ${DEPLOY_DIR} && npm install"
+                    sh "cd ${DEPLOY_DIR}"
                 }
             }
         }
-
-//     stage('Fix Permissions') {
-//     steps {
-//         script {
-//             echo 'Fixing permissions for build process'
-//             sh "sudo chown -R jenkins:jenkins ${DEPLOY_DIR} && sudo chmod -R 775 ${DEPLOY_DIR}"
-//         }
-//     }
-// }
 
 
         stage('Build') {
