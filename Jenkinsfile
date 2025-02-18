@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     echo 'Restarting application with PM2'
-                    sh "/usr/bin/pm2 restart ${APP_NAME} --update-env "
+                    sh "/usr/bin/pm2 restart 0 --update-env "
                 }
             }
         }
