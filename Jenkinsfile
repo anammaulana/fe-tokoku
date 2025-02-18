@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies'
-                    sh "cd ${DEPLOY_DIR} && sudo npm install"
+                    sh "cd ${DEPLOY_DIR} &&  npm install"
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building application'
-                    sh "cd ${DEPLOY_DIR} && sudo npm run build"
+                    sh "cd ${DEPLOY_DIR} &&  npm run build"
                 }
             }
         }
