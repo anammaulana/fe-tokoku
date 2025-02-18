@@ -2,16 +2,28 @@ pipeline {
     agent any
 
     environment {
-        // Set any environment variables you need
-        NODE_ENV = 'production'
+        NODE_VERSION = '22' // Sesuaikan dengan versi Node.js yang digunakan
+        APP_NAME = 'fe-tokoku'
+        DEPLOY_DIR = '/var/www/fe-tokoku'
+        REPO_URL = 'https://github.com/anammaulana/fe-tokoku.git'
+        BRANCH = 'main'
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    echo 'Pulling latest code from repository'
+                    sh "cd ${DEPLOY_DIR} && git pull origin ${BRANCH}"
+                }
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install dependencies using npm
-                    sh 'npm install'
+                    echo 'Installing dependencies'
+                    sh "cd ${DEPLOY_DIR} && npm install"
                 }
             }
         }
@@ -19,26 +31,28 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Build the Next.js app for production
-                    sh 'npm run build'
+                    echo 'Building application'
+                    sh "cd ${DEPLOY_DIR} && npm run build"
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('Restart Application') {
             steps {
                 script {
-                    // Example command to deploy, adjust as needed
-                    sh 'npm run start'
+                    echo 'Restarting application with PM2'
+                    sh "pm2 restart ${APP_NAME} --update-env"
                 }
             }
         }
     }
 
     post {
-        always {
-            // Clean up or notify after the pipeline is done
-            echo 'Pipeline finished'
+        success {
+            echo 'Deployment completed successfully!'
+        }
+        failure {
+            echo 'Deployment failed!'
         }
     }
 }
