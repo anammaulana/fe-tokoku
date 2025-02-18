@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     echo 'Restarting application with PM2'
-                    sh "pm2 restart ${APP_NAME} "
+                    sh "pm2 restart fe-tokoku "
                 }
             }
         }
