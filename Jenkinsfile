@@ -14,9 +14,8 @@ pipeline {
             steps {
                 script {
                     echo 'Cloning repository'
-                   {
-                        sh "git checkout ${BRANCH}"
-                    }
+                   sh "git checkout ${BRANCH}"
+                    
                 }
             }
         }
