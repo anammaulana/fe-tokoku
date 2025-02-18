@@ -10,22 +10,25 @@ pipeline {
     }
 
     stages {
-         stage('Checkout') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/anammaulana/fe-tokoku.git'
+                script {
+                    echo 'Cloning repository'
+                   {
+                        sh "git checkout ${BRANCH}"
+                    }
+                }
             }
         }
-        
 
         stage('Install Dependencies') {
             steps {
                 script {
                     echo 'Installing dependencies'
-                    sh "cd ${DEPLOY_DIR}&& npm install"
+                    sh "cd ${DEPLOY_DIR} && npm install"
                 }
             }
         }
-
 
         stage('Build') {
             steps {
@@ -39,8 +42,11 @@ pipeline {
         stage('Restart Application') {
             steps {
                 script {
+                    echo 'Checking PM2 processes'
+                    sh "pm2 list"
+
                     echo 'Restarting application with PM2'
-                    sh "/usr/bin/pm2 restart 0 --update-env "
+                    sh "pm2 restart ${APP_NAME} --update-env || pm2 start ${DEPLOY_DIR}/app.js --name ${APP_NAME}"
                 }
             }
         }
