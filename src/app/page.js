@@ -45,7 +45,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            hahah bro gw bisa juga yaa
+            hahah bro gw bisa juga yaa1
           </a>
         </div>
       </main>

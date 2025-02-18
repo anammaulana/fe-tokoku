@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     echo 'Pulling latest code from repository'
-                    sh "cd ${DEPLOY_DIR} && git pull origin ${BRANCH}"
+                    sh "cd ${DEPLOY_DIR} && git reset --hard HEAD && git clean -fd && git pull origin ${BRANCH}"
                 }
             }
         }
