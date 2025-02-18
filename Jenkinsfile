@@ -1,7 +1,9 @@
 pipeline {
     agent any
- // Trigger build ketika ada perubahan pada repository
+ triggers {
+        // Trigger build ketika ada perubahan pada repository
         githubPush()
+    }
     environment {
         NODE_VERSION = '22' // Sesuaikan dengan versi Node.js yang digunakan
         APP_NAME = 'fe-tokoku'
