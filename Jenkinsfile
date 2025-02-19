@@ -47,7 +47,7 @@ pipeline {
                     sh "pm2 list"
 
                     echo 'Restarting application with PM2'
-                    sh "pm2 restart ${APP_NAME} --update-env || pm2 restart ${DEPLOY_DIR} --name ${APP_NAME}"
+                    sh "pm2 restart ${APP_NAME} --update-env || pm2 start ${DEPLOY_DIR} --name ${APP_NAME}"
                 }
             }
         }
