@@ -45,7 +45,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            kontolodon23 aksmdaksdja
+            kontolodon23aksdakhduaskhdiaujksa lalal ganteng banyer asdasd
           </a>
         </div>
       </main>

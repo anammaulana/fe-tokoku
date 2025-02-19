@@ -24,14 +24,14 @@ pipeline {
     }
 }
 
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    echo 'Installing dependencies'
-                    sh "cd ${DEPLOY_DIR}"
-                }
-            }
-        }
+        // stage('Install Dependencies') {
+        //     steps {
+        //         script {
+        //             echo 'Installing dependencies'
+        //             sh "cd ${DEPLOY_DIR}"
+        //         }
+        //     }
+        // }
 
         stage('Build') {
             steps {
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 script {
                     echo 'Checking PM2 processes'
-                    sh "pm2 list"
+                     sh "cd ${DEPLOY_DIR} &&  pm2 list"
 
                     echo 'Restarting application with PM2'
                     sh "pm2 restart ${APP_NAME} --update-env || pm2 start ${DEPLOY_DIR} --name ${APP_NAME}"
