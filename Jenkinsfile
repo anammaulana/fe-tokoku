@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    triggers {
+ triggers {
         // Trigger build ketika ada perubahan pada repository
         githubPush()
     }
@@ -8,7 +8,7 @@ pipeline {
         NODE_VERSION = '22' // Sesuaikan dengan versi Node.js yang digunakan
         APP_NAME = 'fe-tokoku'
         DEPLOY_DIR = '/var/www/fe-tokoku'
-        REPO_URL = 'git@github.com:anammaulana/fe-tokoku.git' // Ganti dengan URL SSH repo
+        REPO_URL = 'https://github.com/anammaulana/fe-tokoku.git'
         BRANCH = 'main'
     }
 
@@ -16,13 +16,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'abd4393c-1330-465c-9578-ef920792da02', keyFileVariable: 'SSH_KEY')]) {
-                        echo 'Cloning repository'
-                        sh """
-                            git config --global core.sshCommand "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no"
-                             cd ${DEPLOY_DIR} && git pull origin ${BRANCH}
-                        """
-                    }
+                   sh "git checkout ${BRANCH}"
+                    
                 }
             }
         }
@@ -31,7 +26,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies'
-                    sh "cd ${DEPLOY_DIR} && npm install"
+                    sh "cd ${DEPLOY_DIR} &&  npm install"
                 }
             }
         }
@@ -40,7 +35,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building application'
-                    sh "cd ${DEPLOY_DIR} && npm run build"
+                    sh "cd ${DEPLOY_DIR} &&  npm run build"
                 }
             }
         }
