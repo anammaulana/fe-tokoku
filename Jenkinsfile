@@ -16,7 +16,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    echo 'Cloning repository'
                    sh "git checkout ${BRANCH}"
                     
                 }
@@ -27,7 +26,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies'
-                    sh "cd ${DEPLOY_DIR} && npm install"
+                    sh "cd ${DEPLOY_DIR} &&  npm install"
                 }
             }
         }
@@ -36,7 +35,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building application'
-                    sh "cd ${DEPLOY_DIR} && npm run build"
+                    sh "cd ${DEPLOY_DIR} &&  npm run build"
                 }
             }
         }
@@ -48,7 +47,7 @@ pipeline {
                     sh "pm2 list"
 
                     echo 'Restarting application with PM2'
-                    sh "pm2 restart ${APP_NAME} --update-env || pm2 restart ${DEPLOY_DIR} --name ${APP_NAME}"
+                    sh "pm2 restart ${APP_NAME} --update-env || pm2 start ${DEPLOY_DIR} --name ${APP_NAME}"
                 }
             }
         }
