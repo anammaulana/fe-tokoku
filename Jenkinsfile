@@ -17,7 +17,9 @@ pipeline {
     steps {
         script {
             sh """
-                git pull origin ${BRANCH} --rebase || git fetch origin && git reset --hard origin/${BRANCH}
+                git status
+                git pull origin ${BRANCH}
+                git status
                 git checkout ${BRANCH}
             """
         }
@@ -38,21 +40,22 @@ pipeline {
                 script {
                     echo 'Building application'
                     sh "cd ${DEPLOY_DIR} &&  npm run build"
+                     sh "pm2 restart ${APP_NAME} --update-env"
                 }
             }
         }
 
-        stage('Restart Application') {
-            steps {
-                script {
-                    echo 'Checking PM2 processes'
-                     sh "cd ${DEPLOY_DIR} &&  pm2 list"
+        // stage('Restart Application') {
+        //     steps {
+        //         script {
+        //             echo 'Checking PM2 processes'
+        //              sh "cd ${DEPLOY_DIR} &&  pm2 list"
 
-                    echo 'Restarting application with PM2'
-                    sh "pm2 restart ${APP_NAME} --update-env || pm2 start ${DEPLOY_DIR} --name ${APP_NAME}"
-                }
-            }
-        }
+        //             echo 'Restarting application with PM2'
+        //             sh "pm2 restart ${APP_NAME} --update-env || pm2 start ${DEPLOY_DIR} --name ${APP_NAME}"
+        //         }
+        //     }
+        // }
     }
 
     post {
