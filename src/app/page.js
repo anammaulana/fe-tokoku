@@ -45,7 +45,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            kontolodon23aksdakhduaskhdiaujksa lalal ganteng banyer asdasd
+            Anam Maulana ganting banget eyy
           </a>
         </div>
       </main>
