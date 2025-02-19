@@ -13,20 +13,22 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                script {
-                   sh "git checkout ${BRANCH}"
-                    
-                }
-            }
+    stage('Checkout') {
+    steps {
+        script {
+            sh """
+                git pull origin ${BRANCH} --rebase || git fetch origin && git reset --hard origin/${BRANCH}
+                git checkout ${BRANCH}
+            """
         }
+    }
+}
 
         stage('Install Dependencies') {
             steps {
                 script {
                     echo 'Installing dependencies'
-                    sh "cd ${DEPLOY_DIR} &&  npm install"
+                    sh "cd ${DEPLOY_DIR}"
                 }
             }
         }
