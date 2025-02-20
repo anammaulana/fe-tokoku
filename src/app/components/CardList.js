@@ -5,11 +5,7 @@ import Button from "./Button";
 const CardList = ({ children }) => {
   return (
     <>
-      {/* <div className="bg-fuchsia-400" w-full  p-4>
-            {children}
-           
-        </div> */}
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div className="min-h-screen  flex items-center justify-center p-4">
         <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
           <div className="relative">
             <img
@@ -45,7 +41,7 @@ const CardList = ({ children }) => {
             {/* <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors">
               Add to Cart
             </button> */}
-             <Button/>
+            <Button />
           </div>
         </div>
       </div>

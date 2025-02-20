@@ -24,7 +24,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bg} antialiased`}
       >
+         <div className="flex flex-col items-center justify-center min-h-screen text-center p-6">
+
         {children}
+        <div className="absolute bottom-6 text-gray-500 text-sm">Powered by Ubuntu & Tailwind CSS</div>
+         </div>
       </body>
     </html>
   );
