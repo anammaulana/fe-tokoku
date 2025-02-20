@@ -14,8 +14,8 @@ const Products = async() => {
       <h1 className="bg-fuchsia-500 text-yellow-300">Product page</h1>
         {/* <p>{posts[0].title}</p> */}
       <CardList>
-        <h1>haloo</h1>
-        <h2>{posts[0].title}</h2>
+      
+        {posts[0].title}
       </CardList>
 
       <Link href="/"> back to home</Link>

@@ -7,7 +7,7 @@ const CardList = ({ children }) => {
     <>
       {/* <div className="bg-fuchsia-400" w-full  p-4>
             {children}
-            <Button/>
+           
         </div> */}
       <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
         <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
@@ -24,7 +24,8 @@ const CardList = ({ children }) => {
 
           <div className="p-5 space-y-4">
             <div>
-              <h3 className="text-xl font-bold text-gray-900"> {children}</h3>
+              <h3 className="text-xl font-bold text-gray-900">Harga</h3>
+
               <p className="text-gray-500 mt-1"> {children}</p>
             </div>
 
@@ -41,9 +42,10 @@ const CardList = ({ children }) => {
               </div>
             </div>
 
-            <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors">
+            {/* <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors">
               Add to Cart
-            </button>
+            </button> */}
+             <Button/>
           </div>
         </div>
       </div>
