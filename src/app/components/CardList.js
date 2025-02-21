@@ -1,50 +1,15 @@
 "use client";
 
-import Button from "./Button";
-
-const CardList = ({ children }) => {
+const CardList = ({ key, name, price, stock }) => {
   return (
     <>
-      <div className="min-h-screen  flex items-center justify-center p-4">
-        <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
-          <div className="relative">
-            <img
-              src="https://placehold.co/400x300"
-              alt="Product"
-              className="w-full h-52 object-cover"
-            />
-            <span className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-              Sale
-            </span>
-          </div>
-
-          <div className="p-5 space-y-4">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900">Harga</h3>
-
-              <p className="text-gray-500 mt-1"> {children}</p>
-            </div>
-
-            <div className="flex justify-between items-center">
-              <div className="space-y-1">
-                <p className="text-2xl font-bold text-gray-900">$49.99</p>
-                <p className="text-sm text-gray-500 line-through">$69.99</p>
-              </div>
-
-              <div className="flex items-center gap-1">
-                <div className="text-yellow-400">★★★★</div>
-                <div className="text-gray-300">★</div>
-                <span className="text-sm text-gray-600 ml-1">(42)</span>
-              </div>
-            </div>
-
-            {/* <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors">
-              Add to Cart
-            </button> */}
-            <Button />
-          </div>
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> */}
+        <div key={key} className="p-4 border rounded-lg shadow">
+          <h2 className="text-xl font-bold">{name}</h2>
+          <p className="text-gray-600">Stock: {stock}</p>
+          <p className="text-lg font-semibold text-blue-600">{price}</p>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };
