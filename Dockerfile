@@ -1,28 +1,37 @@
 # 🌟 STAGE 1: Build Next.js
-FROM node:18 AS builder
+FROM node:18-alpine AS builder
 WORKDIR /app
 
-# Salin package.json dan package-lock.json (atau yarn.lock jika menggunakan Yarn)
-COPY package*.json ./
+# Set environment variable for production
+ENV NODE_ENV=production
+
+# Salin file dependency terlebih dahulu agar caching lebih efektif
+COPY package.json package-lock.json ./ 
 
 # Install dependencies
-RUN npm install
+RUN npm install --only=production
 
 # Salin semua kode sumber proyek
-COPY . .
+COPY . . 
 
 # Build aplikasi Next.js
 RUN npm run build
 
-# 🌟 STAGE 2: Menjalankan Next.js
+# 🌟 STAGE 2: Run Next.js Application
 FROM node:18-alpine
 WORKDIR /app
 
-# Salin hasil build dari tahap sebelumnya
-COPY --from=builder /app ./
+# Set environment variable for production
+ENV NODE_ENV=production
 
-# Expose port 3000 (port default Next.js)
-EXPOSE 3001
+# Hanya salin folder yang diperlukan untuk runtime
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
 
-# Jalankan aplikasi Next.js
-CMD ["npm", "run", "start"]
+# Expose port 3000 (default Next.js)
+EXPOSE 3000
+
+# Gunakan entrypoint agar bisa override perintah jika perlu
+ENTRYPOINT ["npm", "run", "start"]
