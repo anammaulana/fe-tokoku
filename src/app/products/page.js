@@ -1,12 +1,12 @@
 import Link from "next/link";
-import CardList from "../components/CardList";
+import CardList from "../components/product/CardList";
 
 const Products = async () => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/products`
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`
   );
   const products = await response.json();
-//   console.log(products);
+  console.log(products);
   return (
     <>
       <h1 className="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
@@ -17,16 +17,19 @@ const Products = async () => {
           return (
             <CardList
               key={data._id}
+              id={data._id}
               name={data.name}
               price={data.price}
               stock={data.stock}
+              image={data.image}
             />
+            
           );
         })}
       </div>
 
       <Link
-        className="px-6 py-3 bg-gray-700 rounded-lg hover:bg-gray-600 transition font-semibold shadow-lg"
+        className="px-6 py-3 bg-fuchsia-700 rounded-lg hover:bg-fuchsia-600 transition font-semibold shadow-lg"
         href="/"
       >
         Back to home
