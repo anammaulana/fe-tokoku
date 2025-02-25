@@ -1,42 +1,28 @@
 # 🌟 STAGE 1: Build Next.js
-FROM node:18-alpine AS builder
+FROM node:18 AS builder
 WORKDIR /app
 
-# Set environment untuk production
-ENV NODE_ENV=production
-
-# Salin file dependency terlebih dahulu agar layer cache lebih efektif
-COPY package.json package-lock.json ./
+# Salin package.json dan package-lock.json (atau yarn.lock jika menggunakan Yarn)
+COPY package*.json ./
 
 # Install dependencies
-RUN npm install --frozen-lockfile
+RUN npm install
 
-# Salin semua kode proyek
+# Salin semua kode sumber proyek
 COPY . .
 
 # Build aplikasi Next.js
 RUN npm run build
 
-# 🌟 STAGE 2: Run Next.js
+# 🌟 STAGE 2: Menjalankan Next.js
 FROM node:18-alpine
 WORKDIR /app
 
-# Set environment untuk production
-ENV NODE_ENV=production
+# Salin hasil build dari tahap sebelumnya
+COPY --from=builder /app ./
 
-# Install only production dependencies
-COPY package.json package-lock.json ./
-RUN npm install --production --frozen-lockfile
+# Expose port 3000 (port default Next.js)
+EXPOSE 3001
 
-# Salin hasil build dari builder
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.js ./next.config.js
-COPY --from=builder /app/tailwind.config.js ./tailwind.config.js
-COPY --from=builder /app/postcss.config.js ./postcss.config.js
-
-# Expose port Next.js
-EXPOSE 3000
-
-# Jalankan aplikasi
+# Jalankan aplikasi Next.js
 CMD ["npm", "run", "start"]
